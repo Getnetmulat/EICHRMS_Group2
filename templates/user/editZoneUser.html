@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!---include header.html which contains the header links-->
+{% extends 'inc/base.html' %} <!--extends the base which contain all css and js contents -->
+{% include 'inc/header.html' %} <!-- inclead the header file -->
+
+{% block title %} User {% endblock title %}
+{% block body %}
+<div id="dialog">
+<div class="card-user">
+  <div class="modal-header">
+    <h5 class="modal-title">Update</h5>
+    {% if current_user.has_role('admin') %}
+      <a href="/branchUser/{{session['collage_id_branch']}}" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+    {% else %}
+      <a href="/userList/" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+    {% endif %}
+  </div>
+  <div class="modal-body">
+    <!-- for user registration -->
+    <form  action="{{url_for('user_mg_bp.updatebranchUser')}}" method="POST" >
+      {% for row, branch, _, _, role in userData %}
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingFname" value="{{row.first_name}}" placeholder="First Name" name="fname" oninvalid="this.setCustomValidity('የመጀመሪያ First Name ')" oninput="setCustomValidity('')" required/>
+        <label id="floatingFname">First Name</label>
+        <input type="hidden" name="id" value="{{row.id}}">
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingLname" value="{{row.last_name}}" placeholder="Middle Name" name="lname" oninvalid="this.setCustomValidity('Middle Name ')" oninput="setCustomValidity('')" required/>
+        <label id="floatingLname">Middle Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="tel" class="form-control" id="floatPhone" value="{{row.phone_number}}" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" name="phone_number" oninvalid="this.setCustomValidity('Phone Number ')" oninput="setCustomValidity('')" required/>
+        <label id="floatPhone">Phone Number</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingEmail" value="{{row.email}}" placeholder="Email " name="email" oninvalid="this.setCustomValidity('ትክክለኛ Email ')" oninput="setCustomValidity('')" required readonly/>
+        <label id="floatingEmail">Email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password " name="password" oninvalid="this.setCustomValidity('Password ')" oninput="setCustomValidity('')"/>
+        <label id="floatingPassword">Password </label>
+      </div>
+      <div class="form-floating">
+        <select id="all_collages" class="form-select" name ="branchName_" id="floatingSelect" aria-label="Floating label select example">
+          <option value="{{row.branchID}}">{{branch.branchName}}</option>
+          {% for row in branchs %}
+          <option value="{{row.id}}">{{row.branchName}}</option>
+          {% endfor %}
+        </select>
+        <label for="floatingSelect">Select Collage</label>
+      </div>
+      {% if current_user.has_role('super-admin') %}
+        <div class="form-floating mt-2">
+          <select class="form-select" name="roleName" id="floatingSelect" aria-label="Floating label select example">
+            <option value="{{row.name}}">{{role.name}}</option>
+            {% for row in roles %}
+            <option value="{{row.name}}">{{row.name}}</option>
+            {% endfor %}
+          </select>
+          <label for="floatingSelect">Select Collage</label>
+        </div>
+      {% endif %}
+      <div class="form-check form-switch mt-2">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Status</label>
+        {% if row.active %}
+          <input class="form-check-input" name="userActive" type="checkbox" role="switch" checked>
+        {% else %}
+          <input class="form-check-input" name="userActive" type="checkbox" role="switch">
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    {% endfor %}
+    </form> <!-- end of form user-registration -->
+  </div>
+</div>
+</div>
+<div class="modal-footer">
+  {% include 'inc/footer.html' %}
+</div>
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='pagination.js') }}"></script>
+{% endblock body %}

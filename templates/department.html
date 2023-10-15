@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% include 'inc/header.html' %}
+{% extends "layouts/base.html" %}
+{% block title %}  {% endblock title %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col md-9">
+                    <!--row container for seach and add buttons-->
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <select class="form-select" name="state" id="maxRows">
+                                <option value="5000">View All</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5> <b>View Department</b>
+                        </div>
+                        <div class="col-sm-4">
+                               <!-- search box-->
+                            <div class="search">
+                                <i class="fa fa-search"></i>
+                                <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Search Here...">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="myBtn" class="myBtn btn btn-success float-end" data-bs-toggle="" data-bs-target="#modalAdd">
+                            New Register</button>
+                        </div>
+                    </div>
+
+                    <!--Add a flash message that display a successful message while adding new record -->
+                    {% with  messages = get_flashed_messages(with_categories=true)  %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div id="success-alert" class="alert alert-{{category}} alert-dismissible " role="alert">
+                                    {{message}}
+
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    {% endwith %}
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-light table-striped table-class table-id sortable" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Job Department</th>
+                                    <th>Department Name</th>
+                                    <th>Salary</th>
+                                    <th>Description</th>
+                                    <th>Registration Date</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <!-- Show all employee data in the table-->
+                            {% for row in  departments %}
+                                <tr>
+                                  <td>
+                                   <div class="edit">{{row.deptName}}</div>
+                                   <input type="text" class="txtEdit form-control" value="{{row.deptName}}" />
+                                  </td>
+                                  <td>
+                                    <div class="edit">{{row.job_dept}}</div>
+                                    <input type="text" class="txtEdit form-control" value="{{row.job_dept}}" />
+                                   </td>
+                                   <td>
+                                    <div class="edit">{{row.Salary}}</div>
+                                    <input type="text" class="txtEdit form-control" value="{{row.Salary}}" />
+                                   </td>
+                                   <td>
+                                    <div class="edit">{{row.Description}}</div>
+                                    <input type="text" class="txtEdit form-control" value="{{row.Description}}" />
+                                   </td>
+                                  <td>{{row.date_registered}}</td>
+
+                                    <td>
+                                      <a href="/deleteDepartment/{{row.id}}" onclick="return confirm('Are You Shure you want to Delete?')" data-bs-placement="top" data-bs-toggle="tooltip" title="Delete" class="btn btn-sm btn-xs" data-bs-title="Delete" data-bs-target="#delete" >
+                                        <i class="fas fa-trash-alt" style="color:red" aria-hidden="true"></i></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %} <!--end of for loop -->
+                            </tbody>
+                        </table>
+                        <!--start Pagination -->
+                        <div class="pagination-container">
+                          <nav aria-label="Page navigation">
+                              <ul class="pagination">
+
+                                  <li class="page-item" data-page="prev"><a class="page-link">
+                                      <span aria-hidden="true"> &laquo; <span class="sr-only">(current)</span></span></a>
+                                  </li>
+                              <!--	Here the JS Function Will Add the Rows -->
+                                  <li class="page-item" data-page="next" id="prev"><a class="page-link">
+                                      <span aria-hidden="true"> &raquo; <span class="sr-only">(current)</span></span></a>
+                                  </li>
+                              </ul>
+                          </nav>
+                        </div>
+                    </div>
+
+                </div> <!--end of table container-fluid-->
+
+            </div> <!--end of column -->
+        </div><!--end of row-->
+
+        <!-- Modal -->
+        <div class="modal" id="modalAdd" aria-labelledby="myModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Register New Department</h5>
+                        <button class="btn-close end" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="{{url_for('department_bp.insert_department')}}" method="POST">
+                        
+
+                            <div class="container1 row g-3">
+                                <label for="inputdeptName" class="form-label">Department Name፡</label>
+                                <input type="text" class="form-control" name ="deptName" required>
+                            </div>
+
+                        <div class="container1 row g-3">
+                            <label for="inputjob_dept" class="form-label">Job Department፡</label>
+                            <input type="text" class="form-control" name="job_dept" required>
+                        </div>
+
+
+                        
+
+                        <div class="container1 row g-3">
+                            <label for="inputsalary" class="form-label">Salary፡</label>
+                            <input type="number" class="form-control" name="Salary" required >
+                        </div>
+                        <div class="container1 row g-3">
+                            <label for="inputdescription" class="form-label">Description</label>
+                            <input type="text" class="form-control" name="Description" required >
+                        </div>
+                            <div class="modal-footer">
+                                <button id="myBtn" class="btn btn-primary" type="submit">Register</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div> <!--end of modal -->
+        <div class="modal-footer">
+            {% include 'inc/footer.html' %}
+        </div>
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/pagination.js') }}"></script>
+{% endblock body %}

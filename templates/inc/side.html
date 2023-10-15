@@ -1,0 +1,86 @@
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"><i id="header-toggle" class="fas fa-bars text-white"></i>
+            <a href="{{url_for('dashboard_bp.dashboard')}}">
+            <i class=" text-white"><img src="{{ url_for('static', filename='logo/logo.jpg') }}" alt="" width="30" height="30">Emerald International Collage</i></a> </div>
+            <div>
+                <a href="{{url_for('auth_bp.logout')}}"><p style="color:#fff">Welcome:{{ current_user.first_name}}
+                <i class="fas fa-sign-out-alt"></i>&nbsp;Logout</p></a></div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                
+                <div class="nav_list"> 
+                    <a class="nav_link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-university"></i> <span class="nav_name">Collage</span> </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>{% if current_user.has_role('super-admin') %}
+                            <a class="nav-link" href="{{url_for('collage_bp.collage')}}" >
+                                Collage &nbsp;&nbsp;&nbsp;&nbsp; <span class="badge bg-primary badge-pill">{{collage_count}}</span>
+                            </a>
+                        {% elif current_user.has_role('admin') %}
+                        <a class="nav-link" href="/branchInfo/{{session['collage_id_branch']}}/" >
+                            Collage Campus</i>
+                            <span class="badge bg-primary badge-pill">{{branch_count}}</span></a>
+                    
+                        {% endif %}
+                    
+                        
+                        </li>                        
+                    </ul>
+                </div>
+        
+                <div class="nav_list">  <a class="nav_link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-user-secret"></i> <span class="nav_name">User Management</span> </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li> <!-- identify the current user -->
+                            {% if current_user.has_role('super-admin') %}
+                            <li class="nav-item"><a class="nav-link"  href="{{url_for('user_mg_bp.userList')}}"><i class="fas fa-users"></i>User Account</a></li>
+                            {% endif %}
+                            <!-- if current user is admin -->
+                            {% if current_user.has_role('admin') %}
+                            <li class="nav-item"><a class="nav-link" href="/branchUser/{{session['collage_id_branch']}}"><i class="fas fa-users"></i>User Account</a></li>
+                            <li class="nav-item">  <a class="nav-link"  href="#changePass" class="" onclick="openForm()"><i class="fas fa-key"></i>Change Password</a></li>
+                            {% endif %}
+        
+                            {% if current_user.has_role('encoder') %}
+                            <li class="nav-item">  <a class="nav-link" href="#changePass" class="" onclick="openForm()"><i class="fas fa-key"></i>Change Password</a></li>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav_list">  <a class="nav_link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-user"></i> <span class="nav_name">Department Info</span> </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li> <!-- identify the current user -->
+                            {% if current_user.has_role('super-admin') %}
+                            <li class="nav-item"><a class="nav-link"  href="{{url_for('department_bp.viewDepartment')}}"><i class="fas fa-users"></i>Department List</a></li>
+                            <li class="nav-item"><a class="nav-link"  href="{{url_for('position_bp.position')}}"><i class="fas fa-users"></i>Position List</a></li>
+                            {% endif %}
+                            <!-- if current user is admin -->
+                            {% if current_user.has_role('admin') %}
+                            <li class="nav-item"><a class="nav-link" href="/branchUser/{{session['collage_id_branch']}}"><i class="fas fa-users"></i>Employee List</a></li>
+                            {% endif %}
+        
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div class="nav_list">  <a class="nav_link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-user"></i> <span class="nav_name">Employee Info</span> </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li> <!-- identify the current user -->
+                            {% if current_user.has_role('super-admin') %}
+                            <li class="nav-item"><a class="nav-link"  href="{{url_for('employee_bp.employeeDetail')}}"><i class="fas fa-users"></i>Employee List</a></li>
+                            {% endif %}
+                            <!-- if current user is admin -->
+                            {% if current_user.has_role('admin') %}
+                            <li class="nav-item"><a class="nav-link" href="/branchUser/{{session['collage_id_branch']}}"><i class="fas fa-users"></i>Employee List</a></li>
+                            {% endif %}
+        
+                        </li>  
+                    </ul>
+                </div>
+                
+            </div> 
+        </nav>
+    </div>
+    
+</body>

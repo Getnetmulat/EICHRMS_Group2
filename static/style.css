@@ -1,0 +1,836 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+:root{--header-height: 3rem;--nav-width: 68px;--first-color-light: #fff;--white-color: #fff;
+  --body-font: 'times', sans-serif;
+  --normal-font-size: 1rem;--z-fixed: 100}*,
+   ::before, ::after{box-sizing: border-box}
+   body{position: relative;margin: var(--header-height) 0 0 0;
+    padding: 0 1rem;font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    transition: .5s}a{text-decoration: none}
+    .header{width: 100%;height: var(--header-height);
+    position: fixed;top: 0;left: 0;display: flex;
+    align-items: center;justify-content: space-between;
+    padding: 0 1rem;background-color: #304458;
+    z-index: var(--z-fixed);transition: .5s}.header_toggle{color: #fff;
+    font-size: 1.5rem;cursor: pointer}.header_img{width: 35px;height: 35px;
+    display: flex;justify-content: center;
+    border-radius: 50%;overflow: hidden}.header_img img{width: 40px}.l-navbar{position: fixed;
+    left: -30%;width: var(--nav-width);height: 100vh;background-color:#2C3E50;
+    padding: .5rem 1rem 0 0;transition: .5s;
+    z-index: var(--z-fixed)}.nav{height: 100%;
+    display: flex;flex-direction: column;
+    justify-content: space-between;overflow: hidden}.nav_logo, .nav_link{display: grid;
+    grid-template-columns: max-content max-content;align-items: center;
+    column-gap: 1rem;padding: .5rem 0 .5rem 1.5rem}.nav_logo{margin-bottom: 2rem}.nav_logo-icon{font-size: 1.25rem;
+    color: var(--white-color)}.nav_logo-name{color: var(--white-color);
+    font-weight: 700}.nav_link{position: relative;color: var(--first-color-light);
+    margin-bottom: 1.5rem;transition: .3s}.nav_link:hover{color: var(--white-color)}.nav_icon{font-size: 1.25rem}.show{left: 0}.body-pd{padding-left: calc(var(--nav-width) + 1rem)}.active{color: var(--white-color)}.active::before{content: '';
+    position: absolute;left: 0;width: 2px;height: 32px;background-color: var(--white-color)}.height-100{height: 100vh}@media screen and (min-width: 768px){body{margin: calc(var(--header-height) + 1rem) 0 0 0;padding-left: calc(var(--nav-width) + 2rem)}.header{height: calc(var(--header-height) + 1rem)}.header_img{width: 40px;height: 40px}.header_img img{width: 45px}.l-navbar{left: 0;
+    padding: 1rem 1rem 0 0}.show{width: calc(var(--nav-width) + 156px)}.body-pd{padding-left: calc(var(--nav-width) + 188px)}}.dropdown-toggle::after{margin-left: 0}
+
+
+    .icon-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      color: #333333;
+      background: #dddddd;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+    }
+    
+    .icon-button:hover {
+      cursor: pointer;
+    }
+    
+    .icon-button:active {
+      background: #cccccc;
+    }
+    
+    .icon-button__badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 25px;
+      height: 25px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+/*unread notification */
+header {
+  font-family: sans-serif;
+  background-color: #2e9bdd;
+  padding: 0 30px;
+  }
+
+.notifications-datetime {
+  font-size: .8rem;
+  font-family: monospace;
+  margin-top: 5px;
+  color: #111;
+}
+
+.notifications-count {
+  background: red;
+  color: white;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: .8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.notifications {
+  position: relative;
+  display: inline-block;
+  width: 2rem;
+  text-align: center;
+  padding: 8px 4px 4px;
+  cursor: pointer;
+}
+  
+  .notifications-listwrapper {
+    position: absolute;
+    top: 140%;
+    right: 0;
+    transform: scale(0);
+    transform-origin: 100% 0;
+  }
+  
+  .notifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow: auto;
+  }
+  
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 10px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -30%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+}
+/*  start multiple form registration css ----- */
+* {
+  margin: 0;
+  padding: 0
+}
+
+html {
+  height: 100%
+}
+
+p {
+  color: grey
+}
+
+#heading {
+  text-transform: uppercase;
+  color: #673AB7;
+  font-weight: normal
+}
+
+#msform {
+  text-align: center;
+  position: relative;
+  margin-top: 2px
+}
+
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding-bottom: 20px;
+  position: relative
+}
+
+.form-card {
+  text-align: center
+}
+#msform input,
+#msform textarea {
+  padding: 8px 15px 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  margin-bottom: 25px;
+  margin-top: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat;
+  color: #2C3E50;
+  background-color: #ECEFF1;
+  font-size: 16px;
+  letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #673AB7;
+  outline-width: 0
+}
+
+#msform .action-button {
+  width: 100px;
+  background: #673AB7;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 0px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 0px 10px 5px;
+  float: right
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+  background-color: #311B92
+}
+
+#msform .action-button-previous {
+  width: 100px;
+  background: #616161;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 0px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px 10px 0px;
+  float: right
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+  background-color: #000000
+}
+
+.card {
+  z-index: 0;
+  border: none;
+  position: relative
+}
+
+.fs-title {
+  font-size: 25px;
+  color: #673AB7;
+  margin-bottom: 15px;
+  font-weight: normal;
+  text-align: left
+}
+
+.purple-text {
+  color: #673AB7;
+  font-weight: normal
+}
+
+.steps {
+  font-size: 25px;
+  color: gray;
+  margin-bottom: 10px;
+  font-weight: normal;
+  text-align: right
+}
+
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  color: lightgrey
+}
+
+#progressbar .active {
+  color: #673AB7
+}
+
+#progressbar li {
+  list-style-type: none;
+  font-size: 15px;
+  width: 16%;
+  float: left;
+  position: relative;
+  font-weight: 400
+}
+
+
+#progressbar #personaldata:before {
+  font-family: FontAwesome;
+  content: "\f13e"
+}
+
+#progressbar #address:before {
+  font-family: FontAwesome;
+  content: "\f007"
+}
+
+#progressbar #educationstatus:before {
+  font-family: FontAwesome;
+  content: "\f030"
+}
+
+#progressbar #membershipstatus:before {
+  font-family: FontAwesome;
+  content: "\f00c"
+}
+
+#progressbar #trainingstatus:before {
+  font-family: FontAwesome;
+  content: "\f020"
+}
+#progressbar #registerleader:before {
+  font-family: FontAwesome;
+  content: "\f020"
+}
+
+#progressbar li:before {
+  width: 50px;
+  height: 50px;
+  line-height: 45px;
+  display: block;
+  font-size: 20px;
+  color: #ffffff;
+  background: lightgray;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  padding: 2px
+}
+
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: lightgray;
+  position: absolute;
+  left: 0;
+  top: 25px;
+  z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #673AB7
+}
+
+.progress {
+  height: 20px
+}
+
+.progress-bar {
+  background-color: #673AB7
+}
+
+.fit-image {
+  width: 100%;
+  object-fit: cover
+}
+/*  end of multiple form registration css ----- */
+body {
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #e3e3e3;
+    font-size: 16px;
+  }
+  * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.bg-primary, .navbar-dark{
+  background-color: #f4f4f4;
+}
+/* css design chart */
+.chart{
+  width:5%;
+  height: 5%;
+}
+.wrapper {
+    height: 100vh;
+    display: flex;
+    /* Direction of the items, can be row or column */
+    flex-direction: column;
+}
+
+.card-user{
+    text-align: center;
+    position: relative;
+    margin:5% auto;
+    width: 460px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px grey;
+}
+
+
+  .txtEdit{
+   display: none;
+   height: 30px;
+  }
+  .container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1170px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+  .container-fluid{
+   padding: auto;
+  }
+  /* css for adding new field button */
+  .add_form_field
+  {
+      background-color: #1c97f3;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+  }
+
+  input{
+      border: 1px solid #1c97f3;
+      width: 85%;
+      height: 40px;
+      margin-bottom:14px;
+      padding:2px 2px
+  }
+
+  .delete{
+      background-color: #fd1200;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+
+  }
+
+/* CSS for Login and User registration UI */
+.login-page {
+  width: 360px;
+  padding: 4% 0 0;
+  margin: auto;
+
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  font-family: 'Times New Roman', Times, serif;
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 16px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #48804b;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 16px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+/* End of Login UI */
+
+#dialog{
+  padding-top:1%;
+}
+
+/* CSS Responsive Header */
+
+@media screen and (max-width: 48em){
+  .header .logo{
+    display: block;
+    font-size: 100%;
+  }
+  .card-user{
+    width: auto;
+  }
+  #dialog{
+    padding-top:11%;
+  }
+}
+@media screen and (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 0px 40px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+  .container-fluid {
+    padding-top: 0.5%;
+  }
+  
+}
+/* end of css header */
+
+/* css for adding new field button */
+.add_form_field
+{
+    background-color: #1c97f3;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input{
+    border: 1px solid #1c97f3;
+    width: 85%;
+    height: 40px;
+    margin-bottom:14px;
+    padding:2px 2px
+}
+
+/* css for searching box */
+.height {
+  height: 100vh
+}
+.search {
+  position: relative;
+
+}
+.search input {
+  height: 50px;
+  text-indent: 25px;
+  border: 2px solid #d6d4d4;
+  border-width: 2px;
+  display: inline-block;
+  padding-left: 1.25em;
+  transition: width 0.4s ease-in-out 0s;
+  width: 30%;
+}
+.search input:focus {
+  width: 60%;
+}
+
+.search .fa-search {
+  position: absolute;
+  top: 20px;
+  left: 16px
+}
+
+.search button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 40px;
+  width: 110px;
+  background: #006699
+}
+
+/* end of search */
+
+#myTable {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 16px; /* Increase font-size */
+  font-family: 'Times New Roman', Times, serif;
+}
+
+p {
+  font-size: 18px;
+  font-family: Times;
+}
+hr {
+  background-color:#27ae60
+}
+
+/* css for sticky footer */
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0px;
+    height:7%;
+    right: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    text-align: center;
+    font-size:18px;
+  }
+
+  .card-footer .text-muted {
+    margin: 5px 0;
+  }
+
+  .footer > .card-footer {
+    padding-right: 15px;
+    padding-left: 15px;
+
+  }
+
+  /* change password css modal */
+
+
+  /* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 100%;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+/*css-for percentage bar */
+
+.percentage-bar {
+    background: #fff;
+    display: block;
+    height: 35px;
+    margin-bottom: 15px;
+    position: relative;
+    transition: 0.4s linear;
+    -moz-transition: 0.4s linear;
+    -ms-transition: 0.4s linear;
+    -o-transition: 0.4s linear;
+    -webkit-transition: 0.4s linear;
+    transition-property: width, background-color;
+    -moz-transition-property: width, background-color;
+    -ms-transition-property: width, background-color;
+    -o-transition-property: width, background-color;
+    -webkit-transition-property: width, background-color;
+    width: 100%;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 14px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 120px;
+}
+
+.title span {
+    background: rgba(0, 0, 0, 0.1);
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.bar {
+    height: 35px;
+    width: 0px;
+}
+
+.percent {
+    color: #ffffff;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 20px;
+    height: 35px;
+    line-height: 35px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}

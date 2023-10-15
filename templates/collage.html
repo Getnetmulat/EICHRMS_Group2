@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!---include header.html which contains the header links-->
+{% include 'inc/header.html' %}
+{% extends "layouts/base.html" %}
+{% block title %}collage{% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12">
+      <div class="col-md-8">
+        <h4 style="padding-left:20px;">Collage Registration Lists</h4>
+      </div>
+      <!--Add a flash message that display a successful message while adding new record -->
+      {% with  messages = get_flashed_messages(with_categories = true)  %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div id="alert-success" class="alert alert-{{ category }} alert-dismissible show" role="alert">
+                <span>{{ message }}</span>
+             </div>
+          {% endfor %}
+      {% endif %}
+     {% endwith %}
+    </div>
+  </div> <!-- end of outer row -->
+  <!--  Search Bar  -->
+  <div class="form-control">
+    <div class="row mt-2">
+      <div class="col-md-8">
+        <div class="search"><i class="fas fa-search"></i>
+          <input type="text" id="searchInput" class="form-control" onkeyup="searchFunction()" placeholder="Search Here...">
+       </div>
+      </div>
+      <!-- add button -->
+      <div class="col-md-2">
+        <button id="myBtn" class="myBtn btn btn-success" data-bs-toggle="" data-bs-target="#modalAdd">
+        New Register</button>
+      </div>
+    </div>
+  </div>
+
+{% if collages %} <!-- display all collage query results if not empty -->
+  <div class="table-responsive">
+    <form method="POST" action="{{url_for('collage_bp.delete')}}">
+      <table class="table tableCheck table-hover table-light table-striped" id="myTable">
+          <!-- check that if the data is empty-->
+          <thead>
+              <th><input type="checkbox" id="checkall" data-bs-placement="top" data-bs-toggle="tooltip" title="Select All Rows" data-bs-title="Select All Rows" data-bs-tooltip="Select All Rows" class="form-check-input"/></th>
+              <th>Collage Name</th>
+              <th>Registration Date</th>
+              <th>Action</th>
+          </thead>
+          <tbody>
+          <!-- Show all collage data in the table-->
+            {% for row in  collages %}
+              <tr>
+                <td><input type="checkbox" value="{{ row.id }}" data-bs-placement="top" data-bs-toggle="tooltip" title="Select Row" data-bs-title="Select Row" data-bs-tooltip="Select Row" name="mycheckbox" class="form-check-input"  /></td>
+                <td>
+                  <div class="edit">{{row.collageName}}</div>
+                  <input type="text" class="txtEdit form-control" value="{{row.collageName}}" id="collageName_{{row.id}}"/>
+                </td>
+                <td>{{row.date_registered}}</td>
+                <!-- action buttons -->
+                <td>
+                  <a href="/branchInfo/{{row.id}}/" data-bs-placement="top" data-bs-toggle="tooltip" title="View" class="btn btn-sm btn-xs" data-bs-title="View" data-bs-target="#editModal">
+                    <i class="fas fa-info-circle" style="color:green" aria-hidden="true"></i></a>
+                  <a href="/deleteSingle/{{row.id}}" onclick="return confirm('Are you shure you want to Delete?')" data-bs-placement="top" data-bs-toggle="tooltip" title="Delete" class="btn btn-sm btn-xs" data-bs-title="Delete" data-bs-target="#delete" >
+                    <i class="fas fa-trash-alt" style="color:red" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="col-sm-1 float-start" id ="checkedDelete">
+          <input type="submit"  onclick="return confirm('Are you shure you want to Delete?')" value="Delete" class="btn btn-primary">
+        </div>
+      </form>
+    </div> <!-- end of div class responsive -->
+  {% else %} <!-- else statment to return if the query result is empty -->
+    <h2>NO! Registerd Collage</h2>
+  {% endif %}
+</div> <!--end of table container-fluid-->
+
+<!-- Modal Add collage  office  -->
+<div class="modal" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">New Register</h5>
+        <button class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('collage_bp.add_collage')}}" method="POST" name="add_skills" id="add_skills">
+          <div class="container1 row g-3">
+            <label for="inputZoneName" class="form-label"> Collage Name፡</label>
+            <div>
+              <input type="text" class="" name="newFieldText[]" required/>
+              <a href="#" class="btn-success float-end add_form_field">+</a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  {% include 'inc/footer.html' %}
+</div>
+
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='pagination.js') }}"></script>
+{% endblock body %}

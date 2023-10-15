@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% include 'inc/header.html' %}
+{% extends "layouts/base.html" %}
+{% block title %}  {% endblock title %}
+
+{% block body %}
+
+                <!--row container for seach and add buttons-->
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <select class="form-select" name="state" id="maxRows">
+                                <option value="5000">View All</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>Positions Lists</b></h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- search box-->
+                            <div class="search">
+                                <i class="fa fa-search"></i>
+                                <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Search Here...">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="myBtn" class="myBtn btn btn-success float-end" data-bs-toggle="" data-bs-target="#modalAdd">
+                            New Register</button>
+                        </div>
+                    </div>
+
+                    <!--Add a flash message that display a successful message while adding new record -->
+                    {% with  messages = get_flashed_messages(with_categories=true)  %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div id="success-alert" class="alert alert-{{category}} alert-dismissible show" role="alert" id="liveAlert">
+                                    {{message}}
+
+                                    <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true">
+                                    </button>
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    {% endwith %}
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-light table-striped table-class table-id sortable" id="myTable">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Position Name</th>
+                                    <th>Department Name</th>
+                                    <th>Registration Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Show all employee data in the table-->
+                                {% for pos, dept in  positions %}
+                                    <tr>
+                                        <td>
+                                            <div class="edit">{{pos.positionName}}</div>
+                                            <input type="text" class="txtEdit form-control" value="{{pos.positionName}}"/>
+                                            </td>
+                                        <td>
+                                        <div class="edit">{{dept.deptName}}</div>
+                                        <select type="text" class="txtEdit form-select" id="deptID_{{dept.id}}">
+                                        {% for row in depNames %}
+                                        <option value="{{row.id}}">{{row.deptName}}</option>
+                                        {% endfor %}
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                        <div>{{pos.date_registered}}</div>
+                                        <input type="text" class="txtEdit form-control" value="{{pos.date_registered}}"/>
+                                        </td>
+                                
+                                    <td>
+                                        <a href="/deletePosition/{{pos.id}}" onclick="return confirm('Are you want to Delete?')" data-bs-placement="top" data-bs-toggle="tooltip" title="Delete" class="btn btn-sm btn-xs" data-bs-title="Delete" data-bs-target="#delete" >
+                                            <i class="fas fa-trash-alt" style="color:red" aria-hidden="true"></i></a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %} <!--end of for loop -->
+                            </tbody>
+                        </table>
+                        <!--start Pagination -->
+                        <div class="pagination-container">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+
+                                <li class="page-item" data-page="prev"><a class="page-link">
+                                    <span aria-hidden="true"> &laquo; <span class="sr-only">(current)</span></span></a>
+                                </li>
+                            <!--	Here the JS Function Will Add the Rows -->
+                                <li class="page-item" data-page="next" id="prev"><a class="page-link">
+                                    <span aria-hidden="true"> &raquo; <span class="sr-only">(current)</span></span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                        
+                    </div> <!--end of table responsive -->
+                </div> <!--end of table container-fluid-->
+
+            </div> <!--end of column -->
+        </div><!--end of row-->
+
+        <!-- Modal -->
+        <div class="modal" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Register New Position</h5>
+                        <button class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="{{url_for('position_bp.insert_position')}}" method="POST" name="position" id="position">
+
+                            <div class="container1 row g-3">
+                                <div class="col-md-11">
+                                    <label for="inputDeptName" class="form-label"> Department Name፡</label>
+                                    <select type="text" class="form-select" name="deptName"  required>
+                                    {% for row in depNames %}
+                                        <option value="{{row.id}}">{{row.deptName}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <label for="inputPos" class="form-label">Position Name፡</label>
+                                <div>
+                                    <input type="text" class="" name="newFieldText[]" required/>
+                                    <a href="#" class="btn-success add_form_field">+</a>
+                                </div>
+
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button id="myBtn" class="btn btn-primary" type="submit">Register</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div> <!--end of modal -->
+    </div><!--end of container-fluid-->
+    <div class="modal-footer">
+        {% include 'inc/footer.html' %}
+    </div>
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/pagination.js') }}"></script>
+{% endblock body %}

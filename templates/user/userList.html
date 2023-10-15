@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% include 'inc/header.html' %}
+{% extends "layouts/base.html" %}
+{% block title %} EMICHRMS-Dashboard {% endblock title %}
+{% block body %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+        <h4 style="padding-left:20px;">User List</h4>
+      
+      <!--Add a flash message that display a successful message while adding new record -->
+      {% with  messages = get_flashed_messages(with_categories = true)  %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div id="close-alert" class="alert alert-{{ category }} alert-dismissible show" role="alert">
+                <span>{{ message }}</span>
+             </div>
+          {% endfor %}
+      {% endif %}
+     {% endwith %}
+    
+  <!--  Search Bar  -->
+  <div class="form-control">
+    <div class="row mt-2">
+      <div class="col-md-8">
+        <div class="search"><i class="fas fa-search"></i>
+          <input type="text" id="searchInput" class="form-control" onkeyup="searchFunction()" placeholder="Search Here......">
+       </div>
+      </div>
+      <!-- add button -->
+      <div class="col-md-2">
+        <button id="myBtn" class="myBtn btn btn-success" data-bs-toggle="" data-bs-target="#modalAdd">
+        New Register</button>
+      </div>
+    </div>
+  </div>
+
+  <!--  Table  displaying list of users-->
+  <div class="table-responsive">
+    <table class="table table-hover table-light table-striped table-class table-id sortable" id="myTable">
+      <!-- check that if the data is empty-->
+      <thead>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Collage</th>
+        <th>Role</th>
+        <th>Registration Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        {% for row, reg, _, _, role in users %}
+          <tr>
+            <td> {{row.first_name}}</td>
+            <td> {{row.last_name}}</td>
+            <td> {{row.phone_number}} </td>
+            <td> {{row.email}}</td>
+            <td> {{reg.collageName}}</td>
+            <td> {{role.name}}</td>
+            <td> {{row.confirmed_at}}</td>
+            <td>
+              <div class="form-check form-switch">
+                {% if row.active %}
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked disabled>
+                {% else %}
+                  <input type="checkbox" value="" class="form-check-input" role="switch" name="is_active" disabled/>
+                {% endif %}
+              </div>
+            </td>
+            
+            <td>
+              <a href="/branchUser/{{row.collageID}}" data-bs-placement="top" data-bs-toggle="tooltip" title="View" class="btn btn-sm btn-xs" data-bs-title="View" data-bs-target="#modalDetail">
+                <i class="fas fa-info-circle" style="color:green" aria-hidden="true"></i></a>
+              <a href="/editUser/{{row.id}}" id="opener" class="btn btn-sm btn-xs"  data-bs-placement="top"  title="Update" data-bs-title="Update"  >
+                <i class="fas fa-pencil-alt" style="color:blue" aria-hidden="true"></i></a>
+              <a href="/delete/{{row.id}}" onclick="return confirm('Are you Shure You want to Delete?')" data-bs-placement="top" data-bs-toggle="tooltip" title="Delete" class="btn btn-sm btn-xs" data-bs-title="Delete" data-bs-target="#delete" >
+                <i class="fas fa-trash-alt" style="color:red" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </div> <!-- end of table responsive div -->
+</div> <!-- end of container-fluid -->
+
+<!-- Modal Add new user -->
+<div class="modal" tabindex="-1" id="modalAdd">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Register</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- for user registration -->
+        <form  action="{{url_for('user_mg_bp.registerUser')}}" method="POST" >
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingFname" placeholder="First Name" name="fname" oninvalid="this.setCustomValidity('Insert First Name ')" oninput="setCustomValidity('')" required/>
+            <label id="floatingFname">First Name</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingLname" placeholder="Middle Name" name="lname" oninvalid="this.setCustomValidity('Insert Middle Name')" oninput="setCustomValidity('')" required/>
+            <label id="floatingLname"> Middle Name</label>
+          </div>
+          <div class="form-floating">
+            <input type="tel" class="form-control" id="floatPhone" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" name="phone_number" oninvalid="this.setCustomValidity('Phone Number ')" oninput="setCustomValidity('')" required/>
+            <label id="floatPhone">Phone Number</label>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" id="floatingEmail" placeholder="Email አስገባ" name="email" oninvalid="this.setCustomValidity(' Email ')" oninput="setCustomValidity('')" required/>
+            <label id="floatingEmail">Email</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password አስገባ" name="password" oninvalid="this.setCustomValidity('Password ')" oninput="setCustomValidity('')" required/>
+            <label id="floatingPassword">Password </label>
+          </div>
+          
+          <div class="form-floating">
+            <select id="all_collages" class="form-select" name ="collageName_" id="floatingSelect" aria-label="Floating label select example">
+              <option disabled selected>---Select Collage--</option>
+              {% for row in collages %}
+              <option value="{{row.id}}">{{row.collageName}}</option>
+              {% endfor %}
+            </select>
+            
+          </div>
+          <div class="form-floating mt-2">
+            <select class="form-select" name="roleName" id="floatingSelect" aria-label="Floating label select example">
+              <option disabled selected>--Select Role--</option>
+              {% for row in roles %}
+              <option value="{{row.name}}">{{row.name}}</option>
+              {% endfor %}
+            </select>
+            
+          </div>
+          <div class="form-check form-switch mt-2">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Status</label>
+            <input class="form-check-input" name="userActive" type="checkbox" role="switch">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div> <!-- end of modal add new user -->
+
+</div> <!-- end of wrapper -->
+<div class="modal-footer">
+  {% include 'inc/footer.html' %}
+</div>
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='pagination.js') }}"></script>
+
+{% endblock body %}

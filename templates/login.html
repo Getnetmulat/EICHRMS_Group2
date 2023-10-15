@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'inc/base.html' %}
+
+{% block title %}EICHRMS-Login {% endblock title %}
+{% block body %}
+<body style="color:#fff; margin:20px; background:">
+{% block content %}
+<div class="container">
+ 
+  <h3 style="text-align: center;">
+
+    
+  <div class="login-page">
+    <img src="{{ url_for('static', filename='logo/logo.jpg') }}" alt="" width="250" height="90" class="d-inline-block align-text-top"></h3>
+    <h2 style="text-align: center; color:#000">Emerald International Collage</h2>
+    <!--Add a flash message that display a failed login message -->
+    {% with  messages = get_flashed_messages()  %}
+      {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+      {% endif %}
+
+    {% endwith %}
+    <div class="form">
+    
+      <form class="login-form" action="{{url_for('auth_bp.login')}}" method="POST">
+        <input type="email" class="form-control" placeholder="Email" name="username"
+        oninvalid="this.setCustomValidity('Email')" oninput="setCustomValidity('')" required/>
+
+        <input type="password" class="form-control" placeholder="Password" name="password"
+        oninvalid="this.setCustomValidity('Password')" oninput="setCustomValidity('')" required/>
+        <hr>
+        <button id="button" type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}
+</body>
+  <!--inline JS -->
+  <div class="modal-footer">
+    {% include 'inc/footer.html' %}
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+
+{% endblock body %}

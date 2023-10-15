@@ -1,0 +1,104 @@
+<!---include header.html which contains the header links-->
+<title> {% block title %} Update Employee {% endblock title %} </title>
+<!-- Include the above in your HEAD tag -->
+{% include 'inc/header.html' %}
+{% extends "layouts/base.html" %}
+{% block body %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+      <!--Add a flash message that display a successful message while adding new record -->
+      {% with  messages = get_flashed_messages(with_categories=true)  %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div id ="success-alert" class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                      {{message}}
+                  </div>
+
+              {% endfor %}
+          {% endif %}
+
+      {% endwith %}
+
+      <div class="card">
+
+        <div class="card-header">
+          Uodate Employee Information
+          <a href="{{url_for('employee_bp.employeeDetail')}}" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></a>
+        </div>
+        <div class="card-body form-container">
+          <form class="row mb-3"  action="{{url_for('employee_bp.updateEmployee')}}" method="POST" enctype="multipart/form-data">
+						{% for row, d, p in emp %}
+            <div class="col-md-4">
+              <label for="inputfname" class="col-form-label">Firist Name፡</label>
+              <input type="text" class="form-control" value ="{{row.fname}}" name ="fname" required>
+            </div>
+            <div class="col-md-4">
+              <label for="inputlname" class="col-form-label">Middle Name፡</label>
+              <input type="text" class="form-control" value="{{row.lname}}" name ="lname" required>
+            </div>
+
+            <div class="col-md-4">
+              <label for="inputfname" class="col-form-label">Gender</label>
+              <input type="text" class="form-control" value ="{{row.gender}}" name ="gender" required>
+            </div>
+            <div class="col-md-4">
+              <label for="inputlname" class="col-form-label">Age:</label>
+              <input type="number" class="form-control" value="{{row.age}}" name ="age" required>
+            </div>
+            <div class="col-md-4">
+              <label for="inputlname" class="col-form-label">Email Address:</label>
+              <input type="email" class="form-control" value="{{row.emp_email}}" name ="emp_email" required>
+            </div>
+            <div class="col-md-4">
+              <label for="inputlname" class="col-form-label">Contact Address:</label>
+              <input type="number" class="form-control" value="{{row.contact_add}}" name ="contact_add" required>
+            </div>
+
+            <div class="col-md-4">
+              <label for="inputDept" class="col-form-label">Department Name፡</label>
+              <select id="departments" class="form-select" style="color: #000;" name ="deptID" required>
+                <option  value="{{d.deptName}}">{{d.deptName}}</option>
+                {% for department in departments  %}
+                <option value="{{department}}">{{department}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="inputRole" class="col-form-label">Position Name:</label>
+              <select id="positions" class="form-select" style="color: #000;" name ="positionID" required>
+                <option value="{{p.positionName}}">{{p.positionName}}</option>
+                {% for row in roles %}
+                <option value="{{row.positionName}}>{{row.positionName}}"></option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label for="formFile" class="col-form-label">Photo:</label>
+              <input class="form-control" type="file" name="photo" id="file", accept=".png,.jpeg,.jpg">
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-5">
+                
+              </div>
+              <div class="col-md-2">
+                  <button id="myBtn" class="btn btn-primary" type="submit">Update</button>
+                      </div>
+                  </div>
+						{% endfor %}
+          </form> <!--end of form-->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% include 'inc/footer.html' %}
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock body %}

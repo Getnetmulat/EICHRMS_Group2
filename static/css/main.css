@@ -1,0 +1,729 @@
+body {
+  font-family  : 'Times New Roman', Times, serif;
+  font-size    : 18px;
+  margin-bottom: 50px;
+  height       : 100%;
+  background: #f2f2f2 ; /* 006699 Set the background color of the page
+  /* color: #fff; Set the text color for better contrast */
+  padding      : 2px;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  p {
+    font-size: 1rem;
+   }
+   
+   h1 {
+    font-size: 3rem; /* 3 times the body text */
+   }
+   
+   h2 {
+    font-size: 2rem; /* 2 times the body text */
+   }
+   
+   h3 {
+    font-size: 1.5rem; /* 1 ½ times the body text */
+   }
+   
+   figcaption {
+    font-size: 0.75rem; /* ¾ of the body text */
+   }
+
+}
+
+* {
+  box-sizing: border-box;
+  margin    : 0;
+  padding   : 0;
+}
+
+
+.login-gms {
+  font-style: normal;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  position: relative;
+  background: #FFFFFF;
+  max-width: 480px;
+  margin: 10px auto 120px;
+  padding: 4px;
+  text-align: center;
+  box-shadow: 10px 10px 20px 0 rgba(26, 76, 141, 0.2), 5px 5px 5px 1px rgba(8, 110, 244, 0.991);
+
+}
+.install-page
+{
+  font-style: normal;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  position: relative;
+  background: #FFFFFF;
+  max-width: 600px;
+  margin: 10px auto 100px;
+  padding: 4px;
+  text-align: center;
+  box-shadow: 1px 1px 2px 0 rgba(26, 76, 141, 0.2);
+}
+
+body>.container-fluid {
+  padding      : 60px 15px 0;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
+
+/* make underline dotted */
+u {
+  border-bottom  : 3px dotted #000;
+  text-decoration: none;
+}
+/* css for overlay dialog box */
+#dialog form {
+  margin: 20px;
+}
+
+.dialog {
+  display         : none;
+  position        : fixed;
+  top             : 25%;
+  left            : 50%;
+  transform       : translate(-50%, -50%);
+  width           : 400px;
+  height          : 200px;
+  background-color: rgba(12, 4, 80, 0.7);
+  z-index         : 1;
+  margin          : 20px"
+
+}
+.dialog .card-title{
+  margin    :10px;
+}
+.fa-clock {
+  font-size: 20px;
+  color: red;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* Custom CSS for the green checkbox */
+.form-check-input:checked {
+  background-color: green;
+  border-color    : green;
+}
+
+.form-check-input:checked+.form-check-label {
+  color: green;
+}
+
+.form-check1-input:checked {
+  background-color: red;
+  border-color    : red;
+}
+
+/* Style for the checkox red */
+.form-check1-input:checked+.check_expired {
+  color    : red;
+  font-size: 1.2em;
+}
+
+/* Apply styles to the pagination buttons */
+/* css for pagination */
+.pagination {
+  display: flex;
+  justify-content: center; /* Center the pagination links horizontally */
+  align-items: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+p {
+  font-size: 1rem;
+ }
+ 
+ h1 {
+  font-size: 3rem; /* 3 times the body text */
+ }
+ 
+ h2 {
+  font-size: 2rem; /* 2 times the body text */
+ }
+ 
+ h3 {
+  font-size: 1.5rem; /* 1 ½ times the body text */
+ }
+ 
+ figcaption {
+  font-size: 0.75rem; /* ¾ of the body text */
+ }
+.pagination-button {
+  color: #fff;
+  background-color: #006699;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 0 5px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  border: 1px solid #ccc;
+}
+
+/* Apply styles to the current page button */
+.pagination-button.current {
+  background-color: #007bff;
+}
+
+/* Apply styles to the "Next" button */
+.pagination-button.next {
+  background-color: green;
+}
+
+/* Apply styles to the disabled state */
+.pagination .disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Apply styles to the dots (ellipsis) */
+.pagination-dots {
+  margin: 0 5px;
+  color: #333;
+}
+
+/* Apply styles on hover */
+.pagination-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Apply styles on active state (e.g., click) */
+.pagination-button:active {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+
+
+/* dotted input form */
+#dotted {
+  border       : 0;
+  border-bottom: 2px dotted;
+}
+
+.txtEdit {
+  display: none;
+  height : 30px;
+}
+
+input[type=text],
+select,
+textarea {
+  width        : 100%;
+  padding      : 12px;
+  border       : 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing   : border-box;
+  margin-top   : 6px;
+  margin-bottom: 16px;
+  resize       : vertical;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color           : white;
+  padding         : 12px 20px;
+  border          : none;
+  border-radius   : 4px;
+  cursor          : pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* CSS */
+.feedback-container {
+  border-radius: 10px; /* Adjust the value to control the amount of rounding */
+  padding: 20px;
+  background-color: #FFFFFF; /* Set the background color for the form container */
+  
+  max-height: calc(100vh - 200px); /* Adjust this value to leave some space for the footer and other elements */
+  overflow-y: auto; /* Enable vertical scrolling for the form */
+}
+/* CSS */
+.form-container {
+  border-radius: 10px; /* Adjust the value to control the amount of rounding */
+  padding: 20px;
+  background-color: #FFFFFF; /* Set the background color for the form container */
+  
+  /* max-height: calc(100vh - 200px);  Adjust this value to leave some space for the footer and other elements */
+  /* overflow-y: auto; Enable vertical scrolling for the form  */
+}
+
+/* Style input fields and buttons with border radius */
+input[type="text"],
+input[type="file"],
+textarea,
+button {
+  border-radius: 5px; /* Adjust the value to control the amount of rounding */
+  border: 1px solid #CCCCCC; /* Add a border to form elements for a cleaner look */
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+/* Style checkboxes and radio buttons with border radius */
+input[type="checkbox"],
+input[type="radio"] {
+  border-radius: 50%; /* Make checkboxes and radio buttons circular */
+}
+
+/* required form asterix */
+.required:after {
+  content: " *";
+  color  : red;
+}
+
+
+/* The Close Button */
+.close {
+  color      : #aaaaaa;
+  float      : right;
+  font-size  : 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color          : #000;
+  text-decoration: none;
+  cursor         : pointer;
+}
+
+
+/* css for adding new field button */
+.add_form_field {
+  background-color: #1c97f3;
+  color           : white;
+  padding         : 5px 15px;
+  text-align      : center;
+  text-decoration : none;
+  display         : inline-block;
+  font-size       : 14px;
+  margin          : 4px 2px;
+  cursor          : pointer;
+}
+
+input {
+  border       : 1px solid #1c97f3;
+  width        : 85%;
+  height       : 40px;
+  margin-bottom: 14px;
+  padding      : 2px 2px
+}
+
+.delete {
+  background-color: #fd1200;
+  border          : none;
+  color           : white;
+  padding         : 5px 15px;
+  text-align      : center;
+  text-decoration : none;
+  display         : inline-block;
+  font-size       : 14px;
+  margin          : 4px 2px;
+  cursor          : pointer;
+
+}
+
+
+.search {
+  position  : relative;
+  box-shadow: 0 0 40px rgba(51, 51, 51, .1)
+}
+
+.search input {
+  height     : 50px;
+  text-indent: 25px;
+  border     : 2px solid #d6d4d4
+}
+
+.search input:focus {
+  box-shadow: none;
+  border    : 2px solid #006699
+}
+
+.search .fa-search {
+  position: absolute;
+  top     : 20px;
+  left    : 16px
+}
+
+.search button {
+  position  : absolute;
+  top       : 5px;
+  right     : 5px;
+  height    : 40px;
+  width     : 110px;
+  background: #006699
+}
+
+/* end of search */
+#myTable {
+  border-collapse: collapse;
+  /* Collapse borders */
+  width          : 100%;
+  /* Full-width */
+  border         : 1px solid #ddd;
+  /* Add a grey border */
+  font-size      : 16px;
+  /* Increase font-size */
+}
+
+
+/* responsive text size */
+.container {
+  margin: 2em 0;
+}
+
+/*
+  Extra small devices (portrait phones, less than 544px)
+  No media query since this is the default in Bootstrap because it is "mobile first"
+  */
+h1 {
+  font-size: 1rem;
+}
+
+/*1rem = 16px*/
+/*
+  ####################################################
+  M E D I A  Q U E R I E S
+  ####################################################
+  */
+
+/*
+  ::::::::::::::::::::::::::::::::::::::::::::::::::::
+  Bootstrap 4 breakpoints
+  */
+
+/*
+  ::::::::::::::::::::::::::::::::::::::::::::::::::::
+  Custom media queries
+  */
+/* Set width to make card deck cards 100% width */
+@media (min-width: 950px) and (max-width:1100px) {
+  h1 {
+    font-size: 2.75rem;
+    color    : red;
+  }
+}
+
+/* Login form toggle when button click */
+/* CSS for Login and User registration UI */
+.login-page {
+  width        : 390px;
+  padding      : 4% 0 0;
+  margin       : auto;
+  align-content: center;
+  height       : auto;
+
+}
+
+.form {
+  position  : relative;
+  z-index   : 1;
+  background: #FFFFFF;
+  max-width : 390px;
+  margin    : 0 auto 100px;
+  padding   : 30px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline    : 0;
+  background : #f2f2f2;
+  width      : 100%;
+  border     : 0;
+  margin     : 0 0 15px;
+  padding    : 15px;
+  box-sizing : border-box;
+  font-size  : 16px;
+}
+
+.form button {
+  text-transform    : uppercase;
+  outline           : 0;
+  width             : 100%;
+  border            : 0;
+  padding           : 15px;
+  color             : #FFFFFF;
+  font-size         : 16px;
+  -webkit-transition: all 0.3 ease;
+  transition        : all 0.3 ease;
+  cursor            : pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: #48804b;
+}
+
+.form .message {
+  margin   : 15px 0 0;
+  color    : #b3b3b3;
+  font-size: 16px;
+}
+
+/* End of Login UI */
+.pagination li:hover {
+  cursor: pointer;
+}
+
+
+
+/* Print */
+
+@media screen {
+  .printpage {
+    font-family: verdana, arial, sans-serif;
+  }
+}
+
+@media print {
+  .printpage {
+    font-family: georgia, times, serif;
+  }
+}
+
+@media screen,
+print {
+  .bodyTprintpageext {
+    font-size: 10pt
+  }
+}
+
+
+/* CSS for Login and User registration UI */
+.login-page {
+  width  : 360px;
+  padding: 4% 0 0;
+  margin : auto;
+
+}
+
+.form {
+  position  : relative;
+  z-index   : 1;
+  background: #FFFFFF;
+  max-width : 360px;
+  margin    : 0 auto 100px;
+  padding   : 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline    : 0;
+  background : #f2f2f2;
+  width      : 100%;
+  border     : 0;
+  margin     : 0 0 15px;
+  padding    : 15px;
+  box-sizing : border-box;
+  font-size  : 16px;
+}
+
+.form button {
+  font-family       : "Roboto", sans-serif;
+  text-transform    : uppercase;
+  outline           : 0;
+  width             : 100%;
+  border            : 0;
+  padding           : 15px;
+  color             : #FFFFFF;
+  font-size         : 16px;
+  -webkit-transition: all 0.3 ease;
+  transition        : all 0.3 ease;
+  cursor            : pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: #48804b;
+}
+
+.form .message {
+  margin   : 15px 0 0;
+  color    : #b3b3b3;
+  font-size: 16px;
+}
+
+.form .message a {
+  color          : #4CAF50;
+  text-decoration: none;
+}
+
+.form .register-form {
+  display: none;
+}
+
+/* End of Login UI */
+
+
+.pagination {
+  margin: 0;
+}
+
+.pagination li:hover {
+  cursor: pointer;
+}
+
+.header_wrap {
+  padding: 30px 0;
+}
+
+.num_rows {
+  width: 20%;
+  float: left;
+}
+
+.tb_search {
+  width: 30%;
+  float: right;
+}
+
+.pagination-container {
+  width: 70%;
+  float: left;
+}
+
+.rows_count {
+  width     : 30%;
+  float     : left;
+  text-align: right;
+  color     : #999;
+  font-size : 20px;
+}
+
+/* css - for popup aditional notes */
+.overlay {
+  position  : fixed;
+  top       : 0;
+  bottom    : 0;
+  left      : 0;
+  right     : 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity   : 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity   : 1;
+}
+
+.popup {
+  margin       : 70px auto;
+  padding      : 20px;
+  background   : #fff;
+  border-radius: 5px;
+  width        : 30%;
+  position     : relative;
+  transition   : all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top : 0;
+  color      : #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup .close {
+  position       : absolute;
+  top            : 20px;
+  right          : 30px;
+  transition     : all 200ms;
+  font-size      : 30px;
+  font-weight    : bold;
+  text-decoration: none;
+  color          : #333;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow  : auto;
+}
+
+@media screen and (max-width: 700px) {
+  .box {
+    width: 70%;
+  }
+
+  .popup {
+    width: 70%;
+  }
+}
+
+
+.btn-primary {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
+/* css search box */
+.search-group {
+  display: flex;
+}
+
+
+.search-form {
+  display: flex;
+  align-items: center; /* Vertically center the elements inside the form */
+}
+
+.search-form input {
+  flex: 1; /* Make the search input grow to fill the available space */
+  padding: 5px; /* Adjust padding as needed */
+  border: 1px solid #ccc; /* Add a border to the search input */
+  border-radius: 5px; /* Add some border radius for a nicer look */
+}
+
+/* Set the height and padding of the button to match the search input */
+.search-form button {
+  height: 38px; /* Adjust the height as needed */
+  padding: 0 10px; /* Adjust padding as needed */
+  border: 1px solid #007bff; /* Add a border to the button */
+  border-radius: 5px; /* Add some border radius for a nicer look */
+  background-color: #007bff; /* Add a background color for the button */
+  color: #fff; /* Set the text color to white */
+  margin-left: 7px;
+  margin-top: 6px;
+}
+
+
+.eic
+{
+  position: relative;
+  background: #28a745;
+  max-width: 660px;
+  padding: 40px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: 10px 10px 20px 0 rgba(26, 76, 141, 0.2), 5px 5px 5px 1px rgba(142, 144, 147, 0.991);
+
+
+}
+
+      

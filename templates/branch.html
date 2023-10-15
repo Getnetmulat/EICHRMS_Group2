@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% include 'inc/header.html' %}
+{% extends "layouts/base.html" %}
+{% block title %} EMICHRMS-Dashboard {% endblock title %}
+{% block body %}
+
+<div class="container-fluid">
+  <div class="row">
+            <div class="col md-12">
+                <!--row container for seach and add buttons-->
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4> <b>Under {{collageName[0]}} Registerd Campuss</b></h4>
+                    </div>
+                    <div class="col-md-4">
+
+                      <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" >
+                        {% if current_user.has_role('super-admin') %}
+                          <div class="btn-group me-2" role="group" aria-label="First group">
+                            <a href="{{url_for('collage_bp.collage')}}" class="btn btn-danger float-end" data-bs-toggle="modal" aria-label="Close">X</a>
+                          </div>
+                        {% endif %}
+                          <div class="btn-group me-2" role="group" aria-label="Second group">
+                            <button id="myBtn" class="myBtn btn btn-success float-end" data-bs-toggle="" data-bs-target="#modalAdd">
+                            New Register</button>
+                          </div>
+                      </div>
+
+                    </div>
+                </div> <!-- end of row buttons -->
+
+                <!--Add a flash message that display a successful message while adding new record -->
+                {% with  messages = get_flashed_messages()  %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div id="close-alert" class="alert alert-success alert-dismissible " role="alert">
+                                {{message}}
+                            </div>
+
+                        {% endfor %}
+                    {% endif %}
+
+                {% endwith %}
+
+              {% if branchs %} <!-- display the query result if not empty -->
+                <div class="table-responsive">
+                    <form method="POST" action="{{url_for('collage_bp.deletebranch')}}">
+                        <table class="table tableCheck table-hover table-light table-striped sortable" id="myTable">
+                                <!-- check that if the data is empty-->
+                            <thead>
+                                <th><input type="checkbox" id="checkall" data-bs-placement="top" data-bs-toggle="tooltip" title="Select All Rows" data-bs-title="Select All Rows" data-bs-tooltip="Select All Rows" class="form-check-input"/></th>
+                                <th>Collage Name</th>
+                                <th>Registration Date</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                            <!-- Show all collage data in the table-->
+                                {% for row in  branchs %}
+                                    <tr>
+                                        <td><input type="checkbox" value="{{ row.id }}" data-bs-placement="top" data-bs-toggle="tooltip" title="Select  Row" data-bs-title="Select  Row" data-bs-tooltip="Select  Row" name="mycheckbox" class="form-check-input"  /></td>
+                                        <td>
+                                            <div class="edit">{{row.branchName}}</div>
+                                            <input type="text" class="txtEdit form-control" value="{{row.branchName}}" id="branchName_{{row.id}}">
+                                        </td>
+                                        <td>{{row.date_registered}}</td>
+
+                                        <td>
+                                            <a href="/deletebranchSingle/{{row.id}}" onclick="return confirm('Are shure you want to Delete?')" data-bs-placement="top" data-bs-toggle="tooltip" title="Delete" class="btn btn-sm btn-xs" data-bs-title="Delete" data-bs-target="#delete" >
+                                                <i class="fas fa-trash-alt" style="color:red" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %} <!--end of for loop -->
+
+                            </tbody>
+                        </table>
+                        <div class="col-sm-1 float-start" id ="checkedDelete">
+                            <input type="submit"  onclick="return confirm('Are shure you want to Delete?')" value="Delete" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div> <!-- end of div class responsive -->
+                {% else %} <!-- else statment to return if the query result is empty -->
+                    <h2>There is No Registerd Data.</h2>
+                {% endif %}
+            </div> <!--end of table container-fluid-->
+        </div> <!--end of column -->
+    </div><!--end of row-->
+
+    <!-- Modal Add collage  office  -->
+    <div class="modal" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">New Register</h5>
+                <button class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{url_for('collage_bp.add_branch')}}" method="POST" name="add_skills" id="add_skills">
+                    <div class="container1 row g-3">
+
+                        <input type="hidden" class="" value="{{session['collageID']}}" name="collageID" required/>
+                        <label for="inputbranchName" class="form-label"> Collage Name፡</label>
+                        <div>
+                            <input type="text" class="" name="newFieldText[]" required/>
+                            <a href="#" class="btn-success float-end add_form_field">+</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        {% include 'inc/footer.html' %}
+    </div>
+<!--inline JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='pagination.js') }}"></script>
+{% endblock body %}
