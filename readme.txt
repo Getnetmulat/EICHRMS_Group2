@@ -1,3 +1,4 @@
+![image](https://github.com/Getnetmulat/EICHRMS/assets/45458965/563ced84-fa5c-4c42-b10f-0213ac109808)
 
 ## Installation
 1. Clone the repository:
