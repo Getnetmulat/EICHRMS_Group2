@@ -6,8 +6,8 @@ class Config(object):
     # Enable debug mode.
     DEBUG = True
     # Connect to the database
-    #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost:3306/eichrms_db'  #connect to MYSQL Database
-    SQLALCHEMY_DATABASE_URI = 'postgresql://eicds:eichrms/15@localhost:5432/eichrms_db' #connect to PostgreSQL Database
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost:3306/eichrms_db'  #connect to MYSQL Database
+    #SQLALCHEMY_DATABASE_URI = 'postgresql://eicds:eichrms/15@localhost:5432/eichrms_db' #connect to PostgreSQL Database
     
     
     # Turn off the Flask-SQLAlchemy event system and warning

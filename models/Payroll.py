@@ -1,5 +1,3 @@
-# Domain models, all model class will be defined here
-
 # import SQLALchemy
 import email
 from App import db
