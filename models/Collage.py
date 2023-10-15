@@ -1,5 +1,3 @@
-# Domain models, all model class will be defined here
-
 # import SQLALchemy
 from App import db
 from flask import request, redirect
