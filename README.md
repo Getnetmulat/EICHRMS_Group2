@@ -1,4 +1,5 @@
-https://github.com/Getnetmulat/EICHRMS/issues/1#issue-1943824613
+![image](https://github.com/Getnetmulat/EICHRMS_Group2/assets/45458965/f4558d90-7c74-478c-b524-05a631801d01)
+
 ## Installation
 1. Clone the repository:
 
